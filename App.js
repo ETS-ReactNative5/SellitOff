@@ -9,6 +9,7 @@ import AppText from "./app/components/AppText";
 import AppButton from "./app/components/AppButton";
 import Card from "./app/components/Card";
 import DetailsScreen from "./app/screens/DetailsScreen";
+import MessagesScreen from "./app/screens/MessagesScreen";
 
 export default function App() {
   // return <WelcomeScreen />;
@@ -26,6 +27,6 @@ export default function App() {
     //   />
     // </View>
 
-    <DetailsScreen />
+    <MessagesScreen />
   );
 }

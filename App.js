@@ -2,31 +2,17 @@
 import { View, StatusBar, Text } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from "./app/components/Icon";
 
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import ViewImageSCreen from "./app/screens/ViewImageScreen";
-import AppText from "./app/components/AppText";
-import AppButton from "./app/components/AppButton";
-import Card from "./app/components/Card";
-import DetailsScreen from "./app/screens/DetailsScreen";
-import MessagesScreen from "./app/screens/MessagesScreen";
+import Screen from "./app/components/Screen";
+import ListItem from "./app/components/ListItem";
+import AccountScreen from "./app/screens/AccountScreen";
 
 export default function App() {
   // return <WelcomeScreen />;
   return (
-    // <View
-    //   style={{
-    //     backgroundColor: "#f8f4f4",
-    //     padding: 20,
-    //     paddingTop: 100,
-    //   }}>
-    //   <Card
-    //     title="Red jacket for sale"
-    //     subTitle="$100"
-    //     image={require("./app/assets/jacket.jpg")}
-    //   />
-    // </View>
-
-    <MessagesScreen />
+    <Screen>
+      <AccountScreen />
+    </Screen>
   );
 }

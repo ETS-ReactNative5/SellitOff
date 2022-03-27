@@ -8,6 +8,9 @@ import AppTextInput from "../components/AppTextInput";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText.android";
 import ErrorMessage from "../components/ErrorMessage";
+import AppFormField from "../components/AppFormField";
+import SubmitButton from "../components/SubmitButton";
+import AppForm from "../components/AppForm";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -20,46 +23,30 @@ function LoginScreen(props) {
       <View style={styles.container}>
         <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
-        <Formik
+        <AppForm
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => console.log(values)}
           validationSchema={validationSchema}>
-          {({
-            handleChange,
-            handleSubmit,
-            errors,
-            setFieldTouched,
-            touched,
-          }) => (
-            <>
-              <AppTextInput
-                placeholder="Email"
-                icon="email"
-                autoCapitalize="none"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                onBlur={() => setFieldTouched("email")}
-                onChangeText={handleChange("email")}
-              />
-              <ErrorMessage error={errors.email} touched={touched.email} />
-              <AppTextInput
-                placeholder="Password"
-                autoCapitalize="none"
-                autoCorrect={false}
-                icon="lock"
-                onBlur={() => setFieldTouched("password")}
-                onChangeText={handleChange("password")}
-                secureTextEntry={true}
-                textContentType="password"
-              />
-              <ErrorMessage
-                error={errors.password}
-                touched={touched.password}
-              />
-              <AppButton textValue="Login" onPress={handleSubmit} />
-            </>
-          )}
-        </Formik>
+          <AppFormField
+            placeholder="Email"
+            name="email"
+            icon="email"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+          />
+          <AppFormField
+            name="password"
+            placeholder="Password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            secureTextEntry={true}
+            textContentType="password"
+          />
+
+          <SubmitButton textValue="Login" />
+        </AppForm>
       </View>
     </Screen>
   );

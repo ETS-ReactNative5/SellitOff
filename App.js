@@ -6,6 +6,9 @@ import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import styles from "./app/config/styles";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
+import ListItem from "./app/components/ListItem";
+import MessagesScreen from "./app/screens/MessagesScreen";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -18,7 +21,7 @@ export default function App() {
   // return <WelcomeScreen />;
   return (
     <Screen>
-      <LoginScreen />
+      <ListingEditScreen />
     </Screen>
   );
 }

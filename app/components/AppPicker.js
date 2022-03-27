@@ -13,12 +13,21 @@ import colors from "../config/colors";
 import AppText from "./AppText.android";
 import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+function AppPicker({
+  icon,
+  items,
+  numberOfColumns = 1,
+  onSelectItem,
+  PickerItemComponent = PickerItem,
+  placeholder,
+  selectedItem,
+  width = "100%",
+}) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               style={styles.icon}
@@ -27,9 +36,12 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
               color={colors.grey}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={25}
@@ -41,10 +53,11 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
         <Button title="Close" onPress={() => setModalVisible(false)} />
         <FlatList
           data={items}
+          numColumns={numberOfColumns}
           keyExtractor={(item) => item.value.toString()}
           renderItem={({ item }) => (
-            <PickerItem
-              label={item.label}
+            <PickerItemComponent
+              item={item}
               onPress={() => {
                 setModalVisible(false);
                 onSelectItem(item);
@@ -62,12 +75,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    flex: 1,
+    color: colors.grey,
   },
   text: {
     flex: 1,

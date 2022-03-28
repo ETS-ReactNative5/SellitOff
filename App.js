@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Screen from "./app/components/Screen";
-
-import AppTextInput from "./app/components/AppTextInput";
-import AppPicker from "./app/components/AppPicker";
-import LoginScreen from "./app/screens/LoginScreen";
-import styles from "./app/config/styles";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import ListItem from "./app/components/ListItem";
-import MessagesScreen from "./app/screens/MessagesScreen";
-
-const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Cameras", value: 3 },
-];
+import ImageInputList from "./app/components/ImageInputList";
 
 export default function App() {
-  const [category, setCategory] = useState();
-  // return <WelcomeScreen />;
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
+
   return (
     <Screen>
-      <ListingEditScreen />
+      <ImageInputList
+        imageUris={imageUris}
+        onAddImage={handleAdd}
+        onRemoveImage={(uri) => handleRemove(uri)}
+      />
     </Screen>
   );
 }
